@@ -37,4 +37,20 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    implementation Libs.rxKotlin
+    implementation Libs.okHttp
+    implementation Libs.rxAndroid
+    implementation Libs.stetho
+    implementation Libs.retrofit
+    implementation Libs.moshi
+    implementation Libs.retrofitMoshiConverter
+    implementation Libs.retrofitRxJavaAdapter
+    implementation Libs.koinAndroid
+    implementation Libs.koinViewModel
+    implementation Libs.koinAndroidxScope
+    implementation Libs.mvrx
+    implementation Libs.epoxy
+    kapt Libs.epoxyAnnotation
+    implementation Libs.timber
 }
