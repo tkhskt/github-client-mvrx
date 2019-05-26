@@ -26,6 +26,7 @@ object Libs {
     val koinAndroid = "org.koin:koin-android:${Versions.koin}"
     val koinAndroidxScope = "org.koin:koin-androidx-scope:${Versions.koin}"
     val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
+    //val koinAndroidArchitecture = "org.koin:koin-android-architecture:${Versions.koin}"
     val mvrx = "com.airbnb.android:mvrx:${Versions.mvrx}"
     val epoxy = "com.airbnb.android:epoxy:${Versions.epoxy}"
     val epoxyAnnotation = "com.airbnb.android:epoxy-processor:${Versions.epoxy}"
