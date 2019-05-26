@@ -9,6 +9,8 @@ object Libs {
         val retrofit = "2.5.0"
         val moshi = "1.8.0"
         val koin = "2.0.0-rc-2"
+        val mvrx = "1.0.1"
+        val epoxy = "3.5.1"
     }
 
     val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
@@ -24,4 +26,7 @@ object Libs {
     val koinAndroid = "org.koin:koin-android:${Versions.koin}"
     val koinAndroidxScope = "org.koin:koin-androidx-scope:${Versions.koin}"
     val koinViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
+    val mvrx = "com.airbnb.android:mvrx:${Versions.mvrx}"
+    val epoxy = "com.airbnb.android:epoxy:${Versions.epoxy}"
+    val epoxyAnnotation = "com.airbnb.android:epoxy-processor:${Versions.epoxy}"
 }
