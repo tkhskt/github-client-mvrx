@@ -6,6 +6,8 @@ apply plugin: 'kotlin-android-extensions'
 
 apply plugin: 'kotlin-kapt'
 
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -19,6 +21,9 @@ android {
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+    }
+    dataBinding {
+        enabled = true
     }
     buildTypes {
         release {
@@ -57,4 +62,6 @@ dependencies {
     implementation Libs.epoxy
     kapt Libs.epoxyAnnotation
     implementation Libs.timber
+    implementation Libs.navigationFragment
+    implementation Libs.navigationUi
 }
