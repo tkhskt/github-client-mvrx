@@ -1,5 +1,13 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+apply plugin: "androidx.navigation.safeargs.kotlin"
+
 android {
     compileSdkVersion 28
 
@@ -27,7 +35,31 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+    implementation 'androidx.core:core-ktx:1.0.2'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+
+    implementation project(":data")
+    implementation project(":common")
+
+    implementation Libs.rxKotlin
+    implementation Libs.okHttp
+    implementation Libs.rxAndroid
+    implementation Libs.stetho
+    implementation Libs.retrofit
+    implementation Libs.moshi
+    implementation Libs.retrofitMoshiConverter
+    implementation Libs.retrofitRxJavaAdapter
+    implementation Libs.koinAndroid
+    implementation Libs.koinViewModel
+    implementation Libs.koinAndroidxScope
+    implementation Libs.mvrx
+    implementation Libs.epoxy
+    kapt Libs.epoxyAnnotation
+    implementation Libs.timber
+    implementation Libs.navigationFragment
+    implementation Libs.navigationUi
 }

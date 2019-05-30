@@ -49,6 +49,8 @@ dependencies {
 
     implementation project(":common")
     implementation project(":data")
+    implementation project(":login")
+
 
     implementation Libs.rxKotlin
     implementation Libs.okHttp
