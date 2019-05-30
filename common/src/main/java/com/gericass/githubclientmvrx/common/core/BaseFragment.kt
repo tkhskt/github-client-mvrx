@@ -1,4 +1,4 @@
-package com.gericass.githubclientmvrx.core
+package com.gericass.githubclientmvrx.common.core
 
 import android.os.Bundle
 import android.os.Parcelable
@@ -8,12 +8,11 @@ import android.view.ViewGroup
 import androidx.annotation.IdRes
 import androidx.appcompat.widget.Toolbar
 import androidx.coordinatorlayout.widget.CoordinatorLayout
-import androidx.navigation.fragment.NavHostFragment.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.MvRx
-import com.gericass.githubclientmvrx.R
-
+import com.gericass.githubclientmvrx.common.R
 
 abstract class BaseFragment : BaseMvRxFragment() {
 
@@ -28,9 +27,9 @@ abstract class BaseFragment : BaseMvRxFragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_base, container, false).apply {
             recyclerView = findViewById(R.id.recycler_view)
@@ -48,7 +47,7 @@ abstract class BaseFragment : BaseMvRxFragment() {
      * Provide the EpoxyController to use when building models for this Fragment.
      * Basic usages can simply use [simpleController]
      */
-    abstract fun epoxyController(): EpoxyController
+    abstract fun epoxyController(): MvRxEpoxyController
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
@@ -67,6 +66,6 @@ abstract class BaseFragment : BaseMvRxFragment() {
          * @see [com.airbnb.mvrx.sample.features.dadjoke.DadJokeDetailState]
          */
         val bundle = arg?.let { Bundle().apply { putParcelable(MvRx.KEY_ARG, it) } }
-        findNavController(this).navigate(actionId, bundle)
+        NavHostFragment.findNavController(this).navigate(actionId, bundle)
     }
 }
