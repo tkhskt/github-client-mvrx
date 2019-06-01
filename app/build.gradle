@@ -17,6 +17,9 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        manifestPlaceholders = [
+                "appAuthRedirectScheme": 'callback'
+        ]
     }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
@@ -48,9 +51,8 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
 
     implementation project(":common")
-    implementation project(":data")
     implementation project(":login")
-
+    implementation project(":data")
 
     implementation Libs.rxKotlin
     implementation Libs.okHttp

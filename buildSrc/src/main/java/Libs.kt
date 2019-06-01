@@ -31,7 +31,7 @@ object Libs {
     val mvrx = "com.airbnb.android:mvrx:${Versions.mvrx}"
     val epoxy = "com.airbnb.android:epoxy:${Versions.epoxy}"
     val epoxyAnnotation = "com.airbnb.android:epoxy-processor:${Versions.epoxy}"
-    val navigationFragment = "androidx.navigation:navigation-fragment:${Versions.navigation}"
-    val navigationUi = "androidx.navigation:navigation-ui:${Versions.navigation}"
+    val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
+    val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
     val navigationGradlePlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
 }

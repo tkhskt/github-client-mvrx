@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/login_nav_graph"
-            app:startDestination="@id/fragment_login">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/login_nav_graph"
+    app:startDestination="@id/fragment_login">
 
     <fragment
-            android:id="@+id/fragment_login"
-            android:name="com.gericass.githubclientmvrx.login.LoginFragment"/>
+        android:id="@+id/fragment_login"
+        android:name="com.gericass.githubclientmvrx.login.LoginFragment">
+        <action
+            android:id="@+id/refresh"
+            app:destination="@id/fragment_login"
+            app:launchSingleTop="true"
+            app:popUpTo="@+id/login_nav_graph"
+            app:popUpToInclusive="true" />
+        <argument
+            android:name="code"
+            android:defaultValue="@null"
+            app:argType="string"
+            app:nullable="true" />
+    </fragment>
 
 </navigation>

@@ -1,5 +1,11 @@
 apply plugin: 'com.android.library'
 
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
 android {
     compileSdkVersion 28
 
@@ -28,12 +34,15 @@ dependencies {
 
     implementation 'androidx.appcompat:appcompat:1.0.2'
     testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'androidx.test:runner:1.1.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+    androidTestImplementation 'androidx.test:runner:1.2.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+    implementation project(":common")
 
     implementation Libs.rxKotlin
     implementation Libs.okHttp
     implementation Libs.rxAndroid
+    implementation Libs.stetho
     implementation Libs.retrofit
     implementation Libs.moshi
     implementation Libs.retrofitMoshiConverter
@@ -41,5 +50,4 @@ dependencies {
     implementation Libs.koinAndroid
     implementation Libs.koinViewModel
     implementation Libs.koinAndroidxScope
-    implementation Libs.mvrx
 }
