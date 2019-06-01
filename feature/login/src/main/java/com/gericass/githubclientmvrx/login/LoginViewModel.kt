@@ -23,6 +23,10 @@ class LoginViewModel(
 ) : MvRxViewModel<LoginState>(initialState) {
 
 
+    fun isLoggedIn(): Boolean {
+        return authRepository.isLoggedIn()
+    }
+
     fun getToken(code: String) {
         authRepository
                 .getToken(CLIENT_ID, CLIENT_SECRET, code)

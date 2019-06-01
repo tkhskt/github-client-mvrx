@@ -5,6 +5,7 @@ import com.gericass.githubclientmvrx.data.AuthRepository
 import com.gericass.githubclientmvrx.data.AuthRepositoryImpl
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
+import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -16,12 +17,12 @@ object Modules {
     val apiModule = module {
         single {
             OkHttpClient()
-                .newBuilder()
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(15, TimeUnit.SECONDS)
-                .readTimeout(15, TimeUnit.SECONDS)
-                .addNetworkInterceptor(StethoInterceptor())
-                .build()
+                    .newBuilder()
+                    .connectTimeout(15, TimeUnit.SECONDS)
+                    .writeTimeout(15, TimeUnit.SECONDS)
+                    .readTimeout(15, TimeUnit.SECONDS)
+                    .addNetworkInterceptor(StethoInterceptor())
+                    .build()
         }
 
         single {
@@ -30,15 +31,15 @@ object Modules {
 
         single {
             Retrofit.Builder()
-                .client(get())
-                .addConverterFactory(MoshiConverterFactory.create(get()))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl("https://github.com")
-                .build()
+                    .client(get())
+                    .addConverterFactory(MoshiConverterFactory.create(get()))
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .baseUrl("https://github.com")
+                    .build()
         }
     }
 
     val repositoryModule = module {
-        single<AuthRepository> { AuthRepositoryImpl(get()) }
+        single<AuthRepository> { AuthRepositoryImpl(androidContext(), get()) }
     }
 }

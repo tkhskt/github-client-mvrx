@@ -17,11 +17,12 @@ class LoginFragment : BaseFragment() {
     private val args: LoginFragmentArgs by navArgs()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val uri = AUTH_URL
+        if (viewModel.isLoggedIn()) {
+        }
         args.code?.let { code ->
             viewModel.getToken(code)
         } ?: run {
-            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(uri))
+            val intent = Intent(Intent.ACTION_VIEW, Uri.parse(AUTH_URL))
             startActivity(intent)
         }
     }

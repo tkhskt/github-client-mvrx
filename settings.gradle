@@ -1,1 +1,1 @@
-include ':app', ':login', ':common', ':data'
+include ':app', ':feature:login', ':common', ':data'
