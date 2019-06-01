@@ -3,6 +3,7 @@ package com.gericass.githubclientmvrx.data
 import android.content.Context
 import android.security.KeyPairGeneratorSpec
 import android.util.Base64
+import androidx.core.content.edit
 import com.gericass.githubclientmvrx.common.extensions.observeOnMainThread
 import com.gericass.githubclientmvrx.data.model.Token
 import com.gericass.githubclientmvrx.data.remote.GitHubClient
@@ -17,8 +18,8 @@ import javax.crypto.Cipher
 import javax.security.auth.x500.X500Principal
 
 class AuthRepositoryImpl(
-        private val context: Context,
-        private val retrofit: Retrofit
+    private val context: Context,
+    private val retrofit: Retrofit
 ) : AuthRepository {
 
     private val preferenceKey = "github_mvrx"
@@ -31,31 +32,25 @@ class AuthRepositoryImpl(
 
     override fun getToken(clientId: String, clientSecret: String, code: String): Observable<Token> {
         val request = mapOf(
-                "client_id" to clientId,
-                "client_secret" to clientSecret,
-                "code" to code
+            "client_id" to clientId,
+            "client_secret" to clientSecret,
+            "code" to code
         )
         return client.getToken("application/json", request)
-                .observeOnMainThread()
+            .observeOnMainThread()
     }
 
     override fun saveToken(token: String): Completable {
         return Completable.create { emitter ->
             val encrypted = Encryptor.encrypt(context, token)
-            sharedPreferences
-                    .edit()
-                    .putString(tokenKey, encrypted)
-                    .apply()
+            sharedPreferences.edit { putString(tokenKey, encrypted) }
             emitter.onComplete()
         }
     }
 
     override fun deleteToken(): Completable {
         return Completable.create { emitter ->
-            sharedPreferences
-                    .edit()
-                    .remove(tokenKey)
-                    .apply()
+            sharedPreferences.edit { remove(tokenKey) }
             emitter.onComplete()
         }
     }
@@ -67,10 +62,10 @@ class AuthRepositoryImpl(
     }
 
     private object Encryptor {
-        val PROVIDER = "AndroidKeyStore"
-        val ALGORITHM = "RSA"
-        val CIPHER_TRANSFORMATION = "RSA/ECB/PKCS1Padding"
-        val TOKEN_ALIAS = "token"
+        const val PROVIDER = "AndroidKeyStore"
+        const val ALGORITHM = "RSA"
+        const val CIPHER_TRANSFORMATION = "RSA/ECB/PKCS1Padding"
+        const val TOKEN_ALIAS = "token"
 
         fun encrypt(context: Context, plainText: String): String {
             val keyStore = KeyStore.getInstance(PROVIDER)
@@ -118,12 +113,12 @@ class AuthRepositoryImpl(
             end.add(Calendar.YEAR, 100)
 
             return KeyPairGeneratorSpec.Builder(context)
-                    .setAlias(TOKEN_ALIAS)
-                    .setSubject(X500Principal(String.format("CN=%s", TOKEN_ALIAS)))
-                    .setSerialNumber(BigInteger.valueOf(1000000))
-                    .setStartDate(start.time)
-                    .setEndDate(end.time)
-                    .build()
+                .setAlias(TOKEN_ALIAS)
+                .setSubject(X500Principal(String.format("CN=%s", TOKEN_ALIAS)))
+                .setSerialNumber(BigInteger.valueOf(1000000))
+                .setStartDate(start.time)
+                .setEndDate(end.time)
+                .build()
         }
 
     }

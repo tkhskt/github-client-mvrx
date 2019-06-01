@@ -39,6 +39,7 @@ dependencies {
 
     implementation project(":common")
 
+    implementation Libs.androidCoreKtx
     implementation Libs.rxKotlin
     implementation Libs.okHttp
     implementation Libs.rxAndroid
@@ -47,7 +48,4 @@ dependencies {
     implementation Libs.moshi
     implementation Libs.retrofitMoshiConverter
     implementation Libs.retrofitRxJavaAdapter
-    implementation Libs.koinAndroid
-    implementation Libs.koinViewModel
-    implementation Libs.koinAndroidxScope
 }

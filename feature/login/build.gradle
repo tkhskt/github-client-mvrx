@@ -39,21 +39,13 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test:runner:1.2.0'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
-    implementation 'androidx.core:core-ktx:1.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
 
     implementation project(":common")
     implementation project(":data")
     implementation project(":feature:main")
 
-    implementation Libs.rxKotlin
-    implementation Libs.okHttp
-    implementation Libs.rxAndroid
-    implementation Libs.stetho
-    implementation Libs.retrofit
-    implementation Libs.moshi
-    implementation Libs.retrofitMoshiConverter
-    implementation Libs.retrofitRxJavaAdapter
+    implementation Libs.androidCoreKtx
     implementation Libs.koinAndroid
     implementation Libs.koinViewModel
     implementation Libs.koinAndroidxScope

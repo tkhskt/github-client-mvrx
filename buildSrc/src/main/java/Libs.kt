@@ -12,6 +12,7 @@ object Libs {
         val mvrx = "1.0.1"
         val epoxy = "3.5.1"
         val navigation = "2.1.0-alpha04"
+        val coreKtx = "1.0.2"
     }
 
     val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
@@ -34,4 +35,5 @@ object Libs {
     val navigationFragment = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
     val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
     val navigationGradlePlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
+    val androidCoreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
 }
