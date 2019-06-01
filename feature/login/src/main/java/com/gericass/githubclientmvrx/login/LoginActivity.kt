@@ -10,7 +10,6 @@ class LoginActivity : BaseMvRxActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
-
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -19,13 +18,5 @@ class LoginActivity : BaseMvRxActivity() {
             val action = LoginFragmentDirections.refresh(it)
             findNavController(R.id.nav_host).navigate(action)
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
     }
 }
