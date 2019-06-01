@@ -37,7 +37,6 @@ class LoginFragment : BaseFragment() {
         requireActivity().finish()
     }
 
-
     override fun invalidate() = withState(viewModel) { state ->
         state.token?.let {
             viewModel.saveToken(it)
@@ -45,6 +44,5 @@ class LoginFragment : BaseFragment() {
         } ?: return@withState
     }
 
-    override fun epoxyController() = simpleController(viewModel) { state ->
-    }
+    override fun epoxyController() = simpleController {}
 }
