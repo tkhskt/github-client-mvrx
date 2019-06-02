@@ -47,7 +47,7 @@
                             android:layout_marginTop="8dp"
                             android:layout_marginEnd="16dp"
                             android:layout_marginBottom="8dp"
-                            android:background="@color/gray_light"
+                            android:background="@android:color/white"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toStartOf="parent"
@@ -57,7 +57,7 @@
                             android:id="@+id/search"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
-                            android:background="@color/gray_light"
+                            android:background="@android:color/white"
                             android:hint="@string/search"
                             android:inputType="text"
                             android:paddingStart="8dp"
@@ -88,8 +88,11 @@
                     android:id="@+id/main_tab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@android:color/darker_gray"
-                    android:layout_alignParentBottom="true" />
+                    android:layout_alignParentBottom="true"
+                    app:tabBackground="@color/gray_dark"
+                    app:tabIndicatorColor="@color/blue"
+                    app:tabSelectedTextColor="@android:color/white"
+                    app:tabTextColor="@color/gray_light" />
 
 
             </com.google.android.material.appbar.AppBarLayout>

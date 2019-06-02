@@ -2,4 +2,7 @@
     <string name="app_name">main</string>
 
     <string name="search">Search</string>
+    <string name="activity">Activity</string>
+    <string name="overview">Overview</string>
+    <string name="repositories">Repositories</string>
 </resources>

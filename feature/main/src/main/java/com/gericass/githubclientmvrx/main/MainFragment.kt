@@ -36,17 +36,29 @@ class MainFragment : BaseMvRxFragment() {
             pager = findViewById(R.id.pager)
             toolbar = findViewById(R.id.toolbar)
             coordinatorLayout = findViewById(R.id.coordinator_layout)
-            val adapter = PagerAdapter(childFragmentManager, this@MainFragment.lifecycle)
+            val pagerAdapter = PagerAdapter(childFragmentManager, this@MainFragment.lifecycle)
             listOf(TestFragment(), TestFragment(), TestFragment()).forEach {
-                adapter.addFragment(it)
+                pagerAdapter.addFragment(it)
             }
-            pager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
-            pager.adapter = adapter
+            pager.apply {
+                orientation = ViewPager2.ORIENTATION_HORIZONTAL
+                adapter = pagerAdapter
+                isUserInputEnabled = false
+            }
             tab = findViewById(R.id.main_tab)
-            TabLayoutMediator(tab, pager, true) { tab, position ->
-                tab.text = "$position"
-            }.attach()
+            setUpTab()
         }
+    }
+
+    private fun setUpTab() {
+        // AutoRefreshは後からどっちか調整した方が良さげ
+        TabLayoutMediator(tab, pager, true) { tab, position ->
+            tab.text = when (position) {
+                0 -> getString(R.string.activity)
+                1 -> getString(R.string.overview)
+                else -> getString(R.string.repositories)
+            }
+        }.attach()
     }
 
     private fun epoxyController() = simpleController {}
