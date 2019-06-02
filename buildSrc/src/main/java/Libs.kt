@@ -15,6 +15,7 @@ object Libs {
         val coreKtx = "1.0.2"
         val viewPager2 = "1.0.0-alpha04"
         val materialComponents = "1.1.0-alpha07"
+        val keyboardVisibilityEvent = "2.3.0"
     }
 
     val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
@@ -40,4 +41,6 @@ object Libs {
     val androidCoreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     val viewPager2 = "androidx.viewpager2:viewpager2:${Versions.viewPager2}"
     val materialComponents = "com.google.android.material:material:${Versions.materialComponents}"
+    val keyboardVisibilityEvent =
+        "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:${Versions.keyboardVisibilityEvent}"
 }

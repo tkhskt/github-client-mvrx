@@ -63,4 +63,5 @@ dependencies {
     implementation Libs.navigationUi
     implementation Libs.viewPager2
     implementation Libs.materialComponents
+    implementation Libs.keyboardVisibilityEvent
 }

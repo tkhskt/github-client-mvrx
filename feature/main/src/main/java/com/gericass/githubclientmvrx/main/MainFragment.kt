@@ -16,6 +16,7 @@ import com.gericass.githubclientmvrx.common.core.simpleController
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent
 
 
 class MainFragment : BaseMvRxFragment() {
@@ -33,9 +34,9 @@ class MainFragment : BaseMvRxFragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_main, container, false).apply {
             pager = findViewById(R.id.main_pager)
@@ -58,11 +59,17 @@ class MainFragment : BaseMvRxFragment() {
     }
 
     private fun setUpKeyBoard() {
+        KeyboardVisibilityEvent.setEventListener(requireActivity()) { visible ->
+            if (!visible) {
+                searchEditText.isFocusable = false
+                searchEditText.isFocusableInTouchMode = true
+            }
+        }
         searchEditText.setOnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER || event.keyCode == KeyEvent.KEYCODE_BACK) {
                 val imm = ContextCompat.getSystemService(
-                        requireContext(),
-                        InputMethodManager::class.java
+                    requireContext(),
+                    InputMethodManager::class.java
                 )
                 imm?.hideSoftInputFromWindow(searchEditText.windowToken, 0)
                 searchEditText.isFocusable = false
