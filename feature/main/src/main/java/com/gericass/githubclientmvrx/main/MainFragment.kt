@@ -11,6 +11,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.gericass.githubclientmvrx.common.core.simpleController
 import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 
 
 class MainFragment : BaseMvRxFragment() {
@@ -42,7 +43,9 @@ class MainFragment : BaseMvRxFragment() {
             pager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             pager.adapter = adapter
             tab = findViewById(R.id.main_tab)
-            
+            TabLayoutMediator(tab, pager, true) { tab, position ->
+                tab.text = "$position"
+            }.attach()
         }
     }
 

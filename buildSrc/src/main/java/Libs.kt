@@ -14,7 +14,7 @@ object Libs {
         val navigation = "2.1.0-alpha04"
         val coreKtx = "1.0.2"
         val viewPager2 = "1.0.0-alpha04"
-        val materialComponents = "1.1.0-alpha06'"
+        val materialComponents = "1.1.0-alpha07"
     }
 
     val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"

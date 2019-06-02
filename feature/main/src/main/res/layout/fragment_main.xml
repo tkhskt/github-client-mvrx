@@ -88,6 +88,7 @@
                     android:id="@+id/main_tab"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:background="@android:color/darker_gray"
                     android:layout_alignParentBottom="true" />
 
 
