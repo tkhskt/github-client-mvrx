@@ -3,6 +3,8 @@ package com.gericass.githubclientmvrx.di
 import com.facebook.stetho.okhttp3.StethoInterceptor
 import com.gericass.githubclientmvrx.data.AuthRepository
 import com.gericass.githubclientmvrx.data.AuthRepositoryImpl
+import com.gericass.githubclientmvrx.data.GitHubRepository
+import com.gericass.githubclientmvrx.data.GitHubRepositoryImpl
 import com.gericass.githubclientmvrx.main.MainActivity
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
@@ -19,12 +21,12 @@ object Modules {
     val apiModule = module {
         single {
             OkHttpClient()
-                .newBuilder()
-                .connectTimeout(15, TimeUnit.SECONDS)
-                .writeTimeout(15, TimeUnit.SECONDS)
-                .readTimeout(15, TimeUnit.SECONDS)
-                .addNetworkInterceptor(StethoInterceptor())
-                .build()
+                    .newBuilder()
+                    .connectTimeout(15, TimeUnit.SECONDS)
+                    .writeTimeout(15, TimeUnit.SECONDS)
+                    .readTimeout(15, TimeUnit.SECONDS)
+                    .addNetworkInterceptor(StethoInterceptor())
+                    .build()
         }
 
         single {
@@ -33,16 +35,17 @@ object Modules {
 
         single {
             Retrofit.Builder()
-                .client(get())
-                .addConverterFactory(MoshiConverterFactory.create(get()))
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .baseUrl("https://github.com")
-                .build()
+                    .client(get())
+                    .addConverterFactory(MoshiConverterFactory.create(get()))
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .baseUrl("https://github.com")
+                    .build()
         }
     }
 
     val repositoryModule = module {
         single<AuthRepository> { AuthRepositoryImpl(androidContext(), get()) }
+        single<GitHubRepository> { GitHubRepositoryImpl(androidContext(), get()) }
     }
 
     val navigationModule = module {

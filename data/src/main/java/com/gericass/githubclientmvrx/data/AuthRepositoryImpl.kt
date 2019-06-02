@@ -22,13 +22,10 @@ class AuthRepositoryImpl(
     private val retrofit: Retrofit
 ) : AuthRepository {
 
-    private val preferenceKey = "github_mvrx"
-
-    private val tokenKey = "token"
 
     private val client by lazy { retrofit.create(GitHubClient::class.java) }
 
-    private val sharedPreferences = context.getSharedPreferences(preferenceKey, Context.MODE_PRIVATE)
+    private val sharedPreferences = context.getSharedPreferences(PREF_KEY, Context.MODE_PRIVATE)
 
     override fun getToken(clientId: String, clientSecret: String, code: String): Observable<Token> {
         val request = mapOf(
@@ -43,29 +40,25 @@ class AuthRepositoryImpl(
     override fun saveToken(token: String): Completable {
         return Completable.create { emitter ->
             val encrypted = Encryptor.encrypt(context, token)
-            sharedPreferences.edit { putString(tokenKey, encrypted) }
+            sharedPreferences.edit { putString(TOKEN_KEY, encrypted) }
             emitter.onComplete()
         }
     }
 
     override fun deleteToken(): Completable {
         return Completable.create { emitter ->
-            sharedPreferences.edit { remove(tokenKey) }
+            sharedPreferences.edit { remove(TOKEN_KEY) }
             emitter.onComplete()
         }
     }
 
     override fun isLoggedIn(): Boolean {
-        sharedPreferences.getString(tokenKey, "").let {
+        sharedPreferences.getString(TOKEN_KEY, "").let {
             return !it.isNullOrEmpty()
         }
     }
 
     private object Encryptor {
-        const val PROVIDER = "AndroidKeyStore"
-        const val ALGORITHM = "RSA"
-        const val CIPHER_TRANSFORMATION = "RSA/ECB/PKCS1Padding"
-        const val TOKEN_ALIAS = "token"
 
         fun encrypt(context: Context, plainText: String): String {
             val keyStore = KeyStore.getInstance(PROVIDER)
@@ -86,22 +79,6 @@ class AuthRepositoryImpl(
 
             // SharedPreferencesに保存しやすいようにBase64でString化
             return Base64.encodeToString(bytes, Base64.DEFAULT)
-        }
-
-        fun decrypt(encryptedText: String): String? {
-            val keyStore = KeyStore.getInstance(PROVIDER)
-            keyStore.load(null)
-            if (!keyStore.containsAlias(TOKEN_ALIAS)) {
-                return null
-            }
-            // 秘密鍵で復号化
-            val privateKey = keyStore.getKey(TOKEN_ALIAS, null)
-            val cipher = Cipher.getInstance(CIPHER_TRANSFORMATION)
-            cipher.init(Cipher.DECRYPT_MODE, privateKey)
-            val bytes = Base64.decode(encryptedText, Base64.DEFAULT)
-
-            val b = cipher.doFinal(bytes)
-            return String(b)
         }
 
         /**

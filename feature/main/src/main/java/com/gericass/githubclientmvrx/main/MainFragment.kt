@@ -12,7 +12,9 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.airbnb.mvrx.BaseMvRxFragment
+import com.airbnb.mvrx.activityViewModel
 import com.gericass.githubclientmvrx.common.core.simpleController
+import com.gericass.githubclientmvrx.main.activity.ActivityFragment
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
@@ -28,6 +30,8 @@ class MainFragment : BaseMvRxFragment() {
     private lateinit var searchEditText: AppCompatEditText
     private val epoxyController by lazy { epoxyController() }
 
+    private val mainViewModel: MainViewModel by activityViewModel()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         epoxyController.onRestoreInstanceState(savedInstanceState)
@@ -42,7 +46,7 @@ class MainFragment : BaseMvRxFragment() {
             pager = findViewById(R.id.main_pager)
             coordinatorLayout = findViewById(R.id.coordinator_layout)
             val pagerAdapter = PagerAdapter(childFragmentManager, this@MainFragment.lifecycle)
-            listOf(TestFragment(), TestFragment(), TestFragment()).forEach {
+            listOf(ActivityFragment(), TestFragment(), TestFragment()).forEach {
                 pagerAdapter.addFragment(it)
             }
             pager.apply {
