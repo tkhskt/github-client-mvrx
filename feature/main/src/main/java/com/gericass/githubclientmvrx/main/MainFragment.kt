@@ -10,6 +10,7 @@ import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.viewpager2.widget.ViewPager2
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.gericass.githubclientmvrx.common.core.simpleController
+import com.google.android.material.tabs.TabLayout
 
 
 class MainFragment : BaseMvRxFragment() {
@@ -17,6 +18,7 @@ class MainFragment : BaseMvRxFragment() {
     private lateinit var toolbar: Toolbar
     private lateinit var coordinatorLayout: CoordinatorLayout
     private lateinit var pager: ViewPager2
+    private lateinit var tab: TabLayout
     private val epoxyController by lazy { epoxyController() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -39,6 +41,8 @@ class MainFragment : BaseMvRxFragment() {
             }
             pager.orientation = ViewPager2.ORIENTATION_HORIZONTAL
             pager.adapter = adapter
+            tab = findViewById(R.id.main_tab)
+            
         }
     }
 

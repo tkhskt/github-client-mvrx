@@ -1,2 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+
+    <style name="EditTextStyle">
+        <item name="colorControlNormal">@android:color/white</item>
+        <item name="colorControlActivated">@color/blue</item>
+        <item name="android:textCursorDrawable">@color/blue</item>
+        <item name="android:textColor">@android:color/black</item>
+        <item name="android:textColorHighlight">@android:color/darker_gray</item>
+    </style>
+</resources>

@@ -26,8 +26,63 @@
                     android:id="@+id/toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    android:background="#552555"
-                    app:layout_scrollFlags="scroll|enterAlways" />
+                    android:background="@color/gray_dark"
+                    app:contentInsetStart="0dp"
+                    app:layout_scrollFlags="scroll|enterAlways">
+
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/search_container"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:descendantFocusability="beforeDescendants"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true">
+
+
+                        <View
+                            android:id="@+id/search_background"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="8dp"
+                            android:background="@color/gray_light"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:id="@+id/search"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:background="@color/gray_light"
+                            android:hint="@string/search"
+                            android:inputType="text"
+                            android:paddingStart="8dp"
+                            android:paddingEnd="8dp"
+                            android:singleLine="true"
+                            android:textCursorDrawable="@drawable/cursor"
+                            android:theme="@style/EditTextStyle"
+                            app:layout_constraintBottom_toBottomOf="@id/search_background"
+                            app:layout_constraintEnd_toStartOf="@id/search_button"
+                            app:layout_constraintStart_toStartOf="@id/search_background"
+                            app:layout_constraintTop_toTopOf="@id/search_background" />
+
+                        <ImageView
+                            android:id="@+id/search_button"
+                            android:layout_width="0dp"
+                            android:layout_height="24dp"
+                            android:layout_marginEnd="8dp"
+                            android:src="@drawable/ic_search_black"
+                            app:layout_constraintBottom_toBottomOf="@id/search_background"
+                            app:layout_constraintEnd_toEndOf="@id/search_background"
+                            app:layout_constraintTop_toTopOf="@id/search_background" />
+
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+
+                </androidx.appcompat.widget.Toolbar>
 
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/main_tab"

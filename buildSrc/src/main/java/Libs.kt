@@ -14,6 +14,7 @@ object Libs {
         val navigation = "2.1.0-alpha04"
         val coreKtx = "1.0.2"
         val viewPager2 = "1.0.0-alpha04"
+        val materialComponents = "1.1.0-alpha06'"
     }
 
     val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
@@ -38,4 +39,5 @@ object Libs {
     val navigationGradlePlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
     val androidCoreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     val viewPager2 = "androidx.viewpager2:viewpager2:${Versions.viewPager2}"
+    val materialComponents = "com.google.android.material:material:${Versions.materialComponents}"
 }
