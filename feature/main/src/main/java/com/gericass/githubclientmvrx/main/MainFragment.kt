@@ -2,24 +2,29 @@ package com.gericass.githubclientmvrx.main
 
 
 import android.os.Bundle
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.appcompat.widget.Toolbar
+import android.view.inputmethod.InputMethodManager
+import androidx.appcompat.widget.AppCompatEditText
 import androidx.coordinatorlayout.widget.CoordinatorLayout
+import androidx.core.content.ContextCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.gericass.githubclientmvrx.common.core.simpleController
+import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 
 
 class MainFragment : BaseMvRxFragment() {
 
-    private lateinit var toolbar: Toolbar
     private lateinit var coordinatorLayout: CoordinatorLayout
     private lateinit var pager: ViewPager2
     private lateinit var tab: TabLayout
+    private lateinit var appBar: AppBarLayout
+    private lateinit var searchEditText: AppCompatEditText
     private val epoxyController by lazy { epoxyController() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -33,8 +38,7 @@ class MainFragment : BaseMvRxFragment() {
             savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_main, container, false).apply {
-            pager = findViewById(R.id.pager)
-            toolbar = findViewById(R.id.toolbar)
+            pager = findViewById(R.id.main_pager)
             coordinatorLayout = findViewById(R.id.coordinator_layout)
             val pagerAdapter = PagerAdapter(childFragmentManager, this@MainFragment.lifecycle)
             listOf(TestFragment(), TestFragment(), TestFragment()).forEach {
@@ -45,8 +49,28 @@ class MainFragment : BaseMvRxFragment() {
                 adapter = pagerAdapter
                 isUserInputEnabled = false
             }
+            searchEditText = findViewById(R.id.search)
             tab = findViewById(R.id.main_tab)
+            appBar = findViewById(R.id.app_bar)
+            setUpKeyBoard()
             setUpTab()
+        }
+    }
+
+    private fun setUpKeyBoard() {
+        searchEditText.setOnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER || event.keyCode == KeyEvent.KEYCODE_BACK) {
+                val imm = ContextCompat.getSystemService(
+                        requireContext(),
+                        InputMethodManager::class.java
+                )
+                imm?.hideSoftInputFromWindow(searchEditText.windowToken, 0)
+                searchEditText.isFocusable = false
+                searchEditText.isFocusableInTouchMode = true
+                true
+            } else {
+                false
+            }
         }
     }
 
