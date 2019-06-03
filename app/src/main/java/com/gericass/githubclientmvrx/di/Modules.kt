@@ -8,12 +8,14 @@ import com.gericass.githubclientmvrx.data.GitHubRepositoryImpl
 import com.gericass.githubclientmvrx.main.MainActivity
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.qualifier.named
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.moshi.MoshiConverterFactory
+import timber.log.Timber
 import java.util.concurrent.TimeUnit
 
 
@@ -21,31 +23,45 @@ object Modules {
     val apiModule = module {
         single {
             OkHttpClient()
-                    .newBuilder()
-                    .connectTimeout(15, TimeUnit.SECONDS)
-                    .writeTimeout(15, TimeUnit.SECONDS)
-                    .readTimeout(15, TimeUnit.SECONDS)
-                    .addNetworkInterceptor(StethoInterceptor())
-                    .build()
+                .newBuilder()
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .writeTimeout(15, TimeUnit.SECONDS)
+                .readTimeout(15, TimeUnit.SECONDS)
+                .addNetworkInterceptor(StethoInterceptor())
+                .addInterceptor(HttpLoggingInterceptor(HttpLoggingInterceptor.Logger {
+                    Timber.tag("okhttp").d(it)
+                }).apply {
+                    level = HttpLoggingInterceptor.Level.BODY
+                })
+                .build()
         }
 
         single {
             Moshi.Builder().build()
         }
 
-        single {
+        single(named("auth")) {
             Retrofit.Builder()
-                    .client(get())
-                    .addConverterFactory(MoshiConverterFactory.create(get()))
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .baseUrl("https://github.com")
-                    .build()
+                .client(get())
+                .addConverterFactory(MoshiConverterFactory.create(get()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .baseUrl("https://github.com")
+                .build()
+        }
+
+        single(named("api")) {
+            Retrofit.Builder()
+                .client(get())
+                .addConverterFactory(MoshiConverterFactory.create(get()))
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .baseUrl("https://api.github.com")
+                .build()
         }
     }
 
     val repositoryModule = module {
-        single<AuthRepository> { AuthRepositoryImpl(androidContext(), get()) }
-        single<GitHubRepository> { GitHubRepositoryImpl(androidContext(), get()) }
+        single<AuthRepository> { AuthRepositoryImpl(androidContext(), get(named("auth"))) }
+        single<GitHubRepository> { GitHubRepositoryImpl(androidContext(), get(named("api"))) }
     }
 
     val navigationModule = module {

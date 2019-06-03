@@ -54,6 +54,7 @@ dependencies {
     implementation Libs.androidCoreKtx
     implementation Libs.rxKotlin
     implementation Libs.okHttp
+    implementation Libs.okHttpLogging
     implementation Libs.rxAndroid
     implementation Libs.stetho
     implementation Libs.retrofit

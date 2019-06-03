@@ -20,6 +20,7 @@ object Libs {
 
     val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
     val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
+    val okHttpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
     val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
     val threeTenAbp = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenAbp}"
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
