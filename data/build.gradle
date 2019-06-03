@@ -48,4 +48,5 @@ dependencies {
     implementation Libs.moshi
     implementation Libs.retrofitMoshiConverter
     implementation Libs.retrofitRxJavaAdapter
+    implementation Libs.timber
 }

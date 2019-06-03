@@ -13,10 +13,14 @@ object Libs {
         val epoxy = "3.5.1"
         val navigation = "2.1.0-alpha04"
         val coreKtx = "1.0.2"
+        val viewPager2 = "1.0.0-alpha04"
+        val materialComponents = "1.1.0-alpha07"
+        val keyboardVisibilityEvent = "2.3.0"
     }
 
     val rxKotlin = "io.reactivex.rxjava2:rxkotlin:${Versions.rxKotlin}"
     val okHttp = "com.squareup.okhttp3:okhttp:${Versions.okHttp}"
+    val okHttpLogging = "com.squareup.okhttp3:logging-interceptor:${Versions.okHttp}"
     val rxAndroid = "io.reactivex.rxjava2:rxandroid:${Versions.rxAndroid}"
     val threeTenAbp = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenAbp}"
     val timber = "com.jakewharton.timber:timber:${Versions.timber}"
@@ -36,4 +40,8 @@ object Libs {
     val navigationUi = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
     val navigationGradlePlugin = "androidx.navigation:navigation-safe-args-gradle-plugin:${Versions.navigation}"
     val androidCoreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
+    val viewPager2 = "androidx.viewpager2:viewpager2:${Versions.viewPager2}"
+    val materialComponents = "com.google.android.material:material:${Versions.materialComponents}"
+    val keyboardVisibilityEvent =
+        "net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:${Versions.keyboardVisibilityEvent}"
 }

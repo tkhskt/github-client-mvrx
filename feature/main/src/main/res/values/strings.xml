@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">main</string>
+
+    <string name="search">Search</string>
+    <string name="activity">Activity</string>
+    <string name="overview">Overview</string>
+    <string name="repositories">Repositories</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
