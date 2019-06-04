@@ -2,4 +2,5 @@ include ':app',
         ':common',
         ':data',
         ':feature:login',
-        ':feature:main'
+        ':feature:main',
+        ':feature:search'

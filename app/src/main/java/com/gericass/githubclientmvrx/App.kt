@@ -3,6 +3,7 @@ package com.gericass.githubclientmvrx
 import android.app.Application
 import com.facebook.stetho.Stetho
 import com.gericass.githubclientmvrx.di.Modules.apiModule
+import com.gericass.githubclientmvrx.di.Modules.navigationModule
 import com.gericass.githubclientmvrx.di.Modules.repositoryModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
@@ -16,7 +17,7 @@ class App : Application() {
             // Android context
             androidContext(this@App)
             // modules
-            modules(apiModule, repositoryModule)
+            modules(apiModule, repositoryModule, navigationModule)
         }
         if (BuildConfig.DEBUG) {
             Stetho.initializeWithDefaults(this)

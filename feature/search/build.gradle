@@ -43,7 +43,6 @@ dependencies {
 
     implementation project(":common")
     implementation project(":data")
-    implementation project(":feature:search")
 
     implementation Libs.rxKotlin
     implementation Libs.okHttp
@@ -59,8 +58,6 @@ dependencies {
     implementation Libs.timber
     implementation Libs.navigationFragment
     implementation Libs.navigationUi
-    implementation Libs.viewPager2
-    implementation Libs.materialComponents
     implementation Libs.keyboardVisibilityEvent
     implementation Libs.glide
     kapt Libs.glideAnnotation

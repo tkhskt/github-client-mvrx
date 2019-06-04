@@ -2,10 +2,22 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/fragment_pager">
+    app:startDestination="@id/fragment_main">
 
     <fragment
-        android:id="@+id/fragment_pager"
-        android:name="com.gericass.githubclientmvrx.main.MainFragment" />
+        android:id="@+id/fragment_main"
+        android:name="com.gericass.githubclientmvrx.main.MainFragment">
+        <action
+            android:id="@+id/main_to_search"
+            app:destination="@id/fragment_search" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragment_search"
+        android:name="com.gericass.githubclientmvrx.search.SearchFragment">
+        <argument
+            android:name="keyword"
+            app:argType="string" />
+    </fragment>
 
 </navigation>

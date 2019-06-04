@@ -5,7 +5,8 @@ import com.gericass.githubclientmvrx.data.AuthRepository
 import com.gericass.githubclientmvrx.data.AuthRepositoryImpl
 import com.gericass.githubclientmvrx.data.GitHubRepository
 import com.gericass.githubclientmvrx.data.GitHubRepositoryImpl
-import com.gericass.githubclientmvrx.main.MainActivity
+import com.gericass.githubclientmvrx.main.MainNavigator
+import com.gericass.githubclientmvrx.navigator.MainNavigatorImpl
 import com.squareup.moshi.Moshi
 import okhttp3.OkHttpClient
 import org.koin.android.ext.koin.androidContext
@@ -63,8 +64,8 @@ object Modules {
     }
 
     val navigationModule = module {
-        scope(named<MainActivity>()) {
-
+        factory<MainNavigator> {
+            MainNavigatorImpl()
         }
     }
 }
