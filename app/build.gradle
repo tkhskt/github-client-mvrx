@@ -50,6 +50,7 @@ dependencies {
     implementation project(":data")
     implementation project(":feature:login")
     implementation project(":feature:main")
+    implementation project(":feature:search")
 
     implementation Libs.androidCoreKtx
     implementation Libs.rxKotlin

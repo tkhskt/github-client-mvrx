@@ -6,7 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.IdRes
-import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import com.airbnb.epoxy.EpoxyRecyclerView
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.MvRx
@@ -23,9 +23,9 @@ abstract class BaseFragment : BaseMvRxFragment() {
     }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater,
+            container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_base, container, false).apply {
             recyclerView = findViewById(R.id.recycler_view)
@@ -60,6 +60,6 @@ abstract class BaseFragment : BaseMvRxFragment() {
          * @see [com.airbnb.mvrx.sample.features.dadjoke.DadJokeDetailState]
          */
         val bundle = arg?.let { Bundle().apply { putParcelable(MvRx.KEY_ARG, it) } }
-        NavHostFragment.findNavController(this).navigate(actionId, bundle)
+        findNavController().navigate(actionId, bundle)
     }
 }

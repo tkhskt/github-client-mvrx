@@ -6,6 +6,7 @@ import com.gericass.githubclientmvrx.common.extensions.observeOnMainThread
 import com.gericass.githubclientmvrx.data.model.Event
 import com.gericass.githubclientmvrx.data.model.LoginUser
 import com.gericass.githubclientmvrx.data.model.ReceiveEvent
+import com.gericass.githubclientmvrx.data.model.Search
 import com.gericass.githubclientmvrx.data.remote.GitHubClient
 import io.reactivex.Observable
 import io.reactivex.schedulers.Schedulers
@@ -34,7 +35,12 @@ class GitHubRepositoryImpl(
 
     override fun getLoginUser(): Observable<LoginUser> {
         return client.getLoginUser(token())
-                .observeOnMainThread()
+                .subscribeOn(Schedulers.io())
+    }
+
+    override fun search(keyword: String, page: Int): Observable<Search> {
+        return client.search(token(), keyword, page)
+                .subscribeOn(Schedulers.io())
     }
 
     private fun token(): String {
