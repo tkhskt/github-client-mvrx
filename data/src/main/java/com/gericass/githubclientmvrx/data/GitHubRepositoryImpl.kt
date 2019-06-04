@@ -8,14 +8,14 @@ import com.gericass.githubclientmvrx.data.model.LoginUser
 import com.gericass.githubclientmvrx.data.model.ReceiveEvent
 import com.gericass.githubclientmvrx.data.remote.GitHubClient
 import io.reactivex.Observable
+import io.reactivex.schedulers.Schedulers
 import retrofit2.Retrofit
-import timber.log.Timber
 import java.security.KeyStore
 import javax.crypto.Cipher
 
 class GitHubRepositoryImpl(
-    context: Context,
-    private val retrofit: Retrofit
+        context: Context,
+        private val retrofit: Retrofit
 ) : GitHubRepository {
 
     private val client by lazy { retrofit.create(GitHubClient::class.java) }
@@ -24,24 +24,23 @@ class GitHubRepositoryImpl(
 
     override fun getEvents(): Observable<List<Event>> {
         return client.getEvents(token())
-            .observeOnMainThread()
+                .observeOnMainThread()
     }
 
-    override fun getReceiveEvents(userName: String): Observable<List<ReceiveEvent>> {
-        return client.getReceiveEvents(token(), userName)
-            .observeOnMainThread()
+    override fun getReceiveEvents(userName: String, page: Int): Observable<List<ReceiveEvent>> {
+        return client.getReceiveEvents(token(), userName, page)
+                .subscribeOn(Schedulers.io())
     }
 
     override fun getLoginUser(): Observable<LoginUser> {
         return client.getLoginUser(token())
-            .observeOnMainThread()
+                .observeOnMainThread()
     }
 
     private fun token(): String {
         val encrypted = pref.getString(TOKEN_KEY, "")
         encrypted?.let {
             Decryptor.decrypt(it)?.let { token ->
-                Timber.tag("TIMTIM").d(token)
                 return "token $token"
             } ?: return ""
         } ?: return ""

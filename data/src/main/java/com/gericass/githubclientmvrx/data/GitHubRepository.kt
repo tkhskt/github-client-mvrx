@@ -9,7 +9,7 @@ interface GitHubRepository {
 
     fun getEvents(): Observable<List<Event>>
 
-    fun getReceiveEvents(userName: String): Observable<List<ReceiveEvent>>
+    fun getReceiveEvents(userName: String, page: Int): Observable<List<ReceiveEvent>>
 
     fun getLoginUser(): Observable<LoginUser>
 }

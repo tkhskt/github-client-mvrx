@@ -3,7 +3,6 @@ package com.gericass.githubclientmvrx.main.activity
 
 import android.os.Bundle
 import android.view.View
-import com.airbnb.mvrx.Loading
 import com.airbnb.mvrx.existingViewModel
 import com.airbnb.mvrx.fragmentViewModel
 import com.gericass.githubclientmvrx.common.core.BaseFragment
@@ -11,6 +10,7 @@ import com.gericass.githubclientmvrx.common.core.simpleController
 import com.gericass.githubclientmvrx.main.MainState
 import com.gericass.githubclientmvrx.main.MainViewModel
 import com.gericass.githubclientmvrx.main.view.activityRow
+import com.gericass.githubclientmvrx.main.view.loadingRow
 import timber.log.Timber
 
 
@@ -33,8 +33,7 @@ class ActivityFragment : BaseFragment() {
         })
     }
 
-    override fun epoxyController() = simpleController(viewModel) { state ->
-        if (state.eventRequest is Loading) return@simpleController
+    override fun epoxyController() = simpleController(viewModel, mainViewModel) { state, mainState ->
         state.events.forEach {
             activityRow {
                 id(it.id)
@@ -45,6 +44,11 @@ class ActivityFragment : BaseFragment() {
                 time(it.created_at)
             }
         }
-
+        loadingRow {
+            id("loading${state.events.size}")
+            mainState.user?.login?.let {
+                onBind { _, _, _ -> viewModel.fetch(it) }
+            }
+        }
     }
 }

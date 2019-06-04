@@ -5,7 +5,13 @@ import com.gericass.githubclientmvrx.data.model.LoginUser
 import com.gericass.githubclientmvrx.data.model.ReceiveEvent
 import com.gericass.githubclientmvrx.data.model.Token
 import io.reactivex.Observable
-import retrofit2.http.*
+import retrofit2.http.FieldMap
+import retrofit2.http.FormUrlEncoded
+import retrofit2.http.GET
+import retrofit2.http.Header
+import retrofit2.http.POST
+import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface GitHubClient {
     @POST(URL_GET_TOKEN)
@@ -16,7 +22,11 @@ interface GitHubClient {
     fun getEvents(@Header(TOKEN_HEADER) header: String): Observable<List<Event>>
 
     @GET(GET_RECEIVE_EVENT)
-    fun getReceiveEvents(@Header(TOKEN_HEADER) header: String, @Path("user_name") userName: String): Observable<List<ReceiveEvent>>
+    fun getReceiveEvents(
+            @Header(TOKEN_HEADER) header: String,
+            @Path("user_name") userName: String,
+            @Query("page") page: Int
+    ): Observable<List<ReceiveEvent>>
 
     @GET(GET_LOGIN_USER)
     fun getLoginUser(@Header(TOKEN_HEADER) header: String): Observable<LoginUser>
