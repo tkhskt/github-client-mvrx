@@ -64,4 +64,7 @@ dependencies {
     implementation Libs.viewPager2
     implementation Libs.materialComponents
     implementation Libs.keyboardVisibilityEvent
+    implementation Libs.glide
+    kapt Libs.glideAnnotation
+    implementation Libs.circleImageView
 }

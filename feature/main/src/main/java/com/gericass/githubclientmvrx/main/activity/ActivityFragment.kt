@@ -10,6 +10,7 @@ import com.gericass.githubclientmvrx.common.core.BaseFragment
 import com.gericass.githubclientmvrx.common.core.simpleController
 import com.gericass.githubclientmvrx.main.MainState
 import com.gericass.githubclientmvrx.main.MainViewModel
+import com.gericass.githubclientmvrx.main.view.activityRow
 import timber.log.Timber
 
 
@@ -34,5 +35,16 @@ class ActivityFragment : BaseFragment() {
 
     override fun epoxyController() = simpleController(viewModel) { state ->
         if (state.eventRequest is Loading) return@simpleController
+        state.events.forEach {
+            activityRow {
+                id(it.id)
+                userName(it.actor.login)
+                userImage(it.actor.avatar_url)
+                repoName(it.repo.name)
+                event(it)
+                time(it.created_at)
+            }
+        }
+
     }
 }
