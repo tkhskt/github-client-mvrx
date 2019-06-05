@@ -16,6 +16,7 @@ import androidx.viewpager2.widget.ViewPager2
 import com.airbnb.mvrx.BaseMvRxFragment
 import com.airbnb.mvrx.activityViewModel
 import com.gericass.githubclientmvrx.common.core.simpleController
+import com.gericass.githubclientmvrx.common.navigator.Navigtor
 import com.gericass.githubclientmvrx.main.activity.ActivityFragment
 import com.google.android.material.appbar.AppBarLayout
 import com.google.android.material.tabs.TabLayout
@@ -36,7 +37,7 @@ class MainFragment : BaseMvRxFragment() {
 
     private val mainViewModel: MainViewModel by activityViewModel()
 
-    private val navigator: MainNavigator by inject()
+    private val navigator: Navigtor.MainNavigator by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +45,9 @@ class MainFragment : BaseMvRxFragment() {
     }
 
     override fun onCreateView(
-            inflater: LayoutInflater,
-            container: ViewGroup?,
-            savedInstanceState: Bundle?
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_main, container, false).apply {
             pager = findViewById(R.id.main_pager)
@@ -72,8 +73,8 @@ class MainFragment : BaseMvRxFragment() {
 
     private fun closeKeyBoard() {
         val imm = ContextCompat.getSystemService(
-                requireContext(),
-                InputMethodManager::class.java
+            requireContext(),
+            InputMethodManager::class.java
         )
         imm?.hideSoftInputFromWindow(searchEditText.windowToken, 0)
     }
