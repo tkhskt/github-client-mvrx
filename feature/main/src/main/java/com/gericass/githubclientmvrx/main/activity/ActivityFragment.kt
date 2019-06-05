@@ -7,10 +7,10 @@ import com.airbnb.mvrx.existingViewModel
 import com.airbnb.mvrx.fragmentViewModel
 import com.gericass.githubclientmvrx.common.core.BaseFragment
 import com.gericass.githubclientmvrx.common.core.simpleController
+import com.gericass.githubclientmvrx.common.view.loadingRow
 import com.gericass.githubclientmvrx.main.MainState
 import com.gericass.githubclientmvrx.main.MainViewModel
 import com.gericass.githubclientmvrx.main.view.activityRow
-import com.gericass.githubclientmvrx.main.view.loadingRow
 import timber.log.Timber
 
 

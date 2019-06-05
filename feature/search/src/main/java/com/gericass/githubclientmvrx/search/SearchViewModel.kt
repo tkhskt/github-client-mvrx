@@ -2,7 +2,12 @@ package com.gericass.githubclientmvrx.search
 
 import android.annotation.SuppressLint
 import android.os.Parcelable
-import com.airbnb.mvrx.*
+import com.airbnb.mvrx.Async
+import com.airbnb.mvrx.Loading
+import com.airbnb.mvrx.MvRxState
+import com.airbnb.mvrx.MvRxViewModelFactory
+import com.airbnb.mvrx.Uninitialized
+import com.airbnb.mvrx.ViewModelContext
 import com.gericass.githubclientmvrx.common.core.MvRxViewModel
 import com.gericass.githubclientmvrx.data.GitHubRepository
 import com.gericass.githubclientmvrx.data.model.Search
@@ -16,22 +21,26 @@ private const val PER_PAGE = 50
 data class SearchArgs(val keyword: String) : Parcelable
 
 data class SearchState(
-    val keyword: String,
-    val searchItems: List<Search.Item> = emptyList(),
-    val searchRequest: Async<Search> = Uninitialized
+        val keyword: String,
+        val searchItems: List<Search.Item> = emptyList(),
+        val searchRequest: Async<Search> = Uninitialized
 ) : MvRxState {
     constructor(args: SearchArgs) : this(keyword = args.keyword)
 }
 
 class SearchViewModel(
-    initialState: SearchState,
-    private val repository: GitHubRepository
+        initialState: SearchState,
+        private val repository: GitHubRepository
 ) : MvRxViewModel<SearchState>(initialState) {
 
-    fun search(keyword: String) = withState { state ->
+    init {
+        search()
+    }
+
+    fun search() = withState { state ->
         if (state.searchRequest is Loading) return@withState
-        repository.search(keyword, state.searchItems.size / PER_PAGE + 1)
-            .execute { copy(searchItems = searchItems + (it()?.items ?: emptyList())) }
+        repository.search(state.keyword, state.searchItems.size / PER_PAGE + 1)
+                .execute { copy(searchItems = searchItems + (it()?.items ?: emptyList())) }
     }
 
     companion object : MvRxViewModelFactory<SearchViewModel, SearchState> {
