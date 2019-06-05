@@ -25,9 +25,9 @@ class SearchFragment : BaseFragment() {
         state.searchItems.forEach {
             repositoryRow {
                 id(it.id)
-                repoName(it.full_name)
-                description(it.description)
-                starCount(it.stargazers_count.toString())
+                it.full_name?.let { repoName(it) }
+                it.description?.let { description(it) }
+                it.stargazers_count?.toString()?.let { starCount(it) }
             }
         }
         loadingRow {
